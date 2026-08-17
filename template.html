@@ -1,0 +1,989 @@
+<title>Disposição de Acessórios</title>
+<style>
+  /* ---------- tokens: tema claro (estado base, sem marcacao) ---------- */
+  :root {
+    --bg: #F1F3F6;
+    --surface: #FFFFFF;
+    --surface-2: #E7EBF0;
+    --ink: #0F141A;
+    --ink-2: #4B5661;
+    --ink-3: #78838F;
+    --line: #D5DBE2;
+    --line-strong: #B9C2CC;
+    --slate: #1A242C;
+    --slate-ink: #F4F7F9;
+    --slate-ink-2: #9FAEBA;
+    --accent: #E9A400;
+    --accent-ink: #241A00;
+    --ok: #10643A;        --ok-bg: #DCEFE4;
+    --falta: #A42116;     --falta-bg: #F8DFDD;
+    --sobra: #17518F;     --sobra-bg: #DCE8F7;
+    --semcad: #514A5E;    --semcad-bg: #E6E3EC;
+    --shadow: 0 1px 2px rgba(15,20,26,.06), 0 8px 20px -12px rgba(15,20,26,.18);
+
+    --font-sans: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "Cascadia Mono", "Segoe UI Mono", "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0D1216;
+      --surface: #151C22;
+      --surface-2: #1D262E;
+      --ink: #E7EDF2;
+      --ink-2: #A2ADB8;
+      --ink-3: #78838E;
+      --line: #29343D;
+      --line-strong: #3A4650;
+      --slate: #070A0D;
+      --slate-ink: #EEF2F5;
+      --slate-ink-2: #8B9AA6;
+      --accent: #FFC22E;
+      --accent-ink: #1F1600;
+      --ok: #5CC38B;        --ok-bg: #10301F;
+      --falta: #F08A7E;     --falta-bg: #3A1512;
+      --sobra: #7FB4EF;     --sobra-bg: #10263D;
+      --semcad: #B3A9C4;    --semcad-bg: #241F2C;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 24px -14px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0D1216;
+    --surface: #151C22;
+    --surface-2: #1D262E;
+    --ink: #E7EDF2;
+    --ink-2: #A2ADB8;
+    --ink-3: #78838E;
+    --line: #29343D;
+    --line-strong: #3A4650;
+    --slate: #070A0D;
+    --slate-ink: #EEF2F5;
+    --slate-ink-2: #8B9AA6;
+    --accent: #FFC22E;
+    --accent-ink: #1F1600;
+    --ok: #5CC38B;        --ok-bg: #10301F;
+    --falta: #F08A7E;     --falta-bg: #3A1512;
+    --sobra: #7FB4EF;     --sobra-bg: #10263D;
+    --semcad: #B3A9C4;    --semcad-bg: #241F2C;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 24px -14px rgba(0,0,0,.7);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 16px 72px;
+  }
+
+  a { color: inherit; }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  /* ---------- barra superior ---------- */
+  .topbar {
+    background: var(--slate);
+    color: var(--slate-ink);
+    padding: 14px 0 16px;
+    margin-bottom: 20px;
+  }
+  .topbar .wrap { padding-bottom: 0; }
+  .topbar-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    font-size: 1.0625rem;
+    font-weight: 650;
+    letter-spacing: -.01em;
+    margin: 0;
+  }
+  .brand a { text-decoration: none; }
+  .stamp {
+    font-family: var(--font-mono);
+    font-size: .6875rem;
+    color: var(--slate-ink-2);
+    letter-spacing: .02em;
+  }
+
+  /* ---------- botoes ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font: inherit;
+    font-size: .875rem;
+    font-weight: 550;
+    padding: 8px 14px;
+    border-radius: 7px;
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    color: var(--ink);
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .btn:hover { background: var(--surface-2); }
+  .btn-accent {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+  }
+  .btn-accent:hover { filter: brightness(1.06); background: var(--accent); }
+  .btn-ghost {
+    background: transparent;
+    border-color: transparent;
+    color: var(--ink-2);
+    padding-left: 0;
+  }
+  .btn-ghost:hover { background: transparent; color: var(--ink); }
+
+  /* ---------- busca ---------- */
+  .search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 0 12px;
+    box-shadow: var(--shadow);
+  }
+  .search svg { flex: none; color: var(--ink-3); }
+  .search input {
+    font: inherit;
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    padding: 13px 10px;
+    outline: none;
+  }
+  .search input::placeholder { color: var(--ink-3); }
+  .search-clear {
+    border: 0;
+    background: transparent;
+    color: var(--ink-3);
+    font: inherit;
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 4px 2px;
+  }
+  .search-clear:hover { color: var(--ink); }
+
+  /* ---------- secoes ---------- */
+  .section-label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: .6875rem;
+    font-weight: 650;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 30px 0 10px;
+  }
+  .section-label .count {
+    font-family: var(--font-mono);
+    letter-spacing: .02em;
+  }
+
+  /* ---------- grade de armarios ---------- */
+  .cab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+  }
+  .cab {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    padding: 14px 14px 13px;
+    text-decoration: none;
+    box-shadow: var(--shadow);
+  }
+  .cab:hover { border-color: var(--line-strong); }
+  .cab-n {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+  }
+  .cab-n b {
+    font-family: var(--font-mono);
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -.02em;
+  }
+  .cab-n span {
+    font-size: .625rem;
+    font-weight: 650;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .cab-qtd {
+    font-family: var(--font-mono);
+    font-size: 1.0625rem;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+    margin-top: 8px;
+  }
+  .cab-sub {
+    font-size: .75rem;
+    color: var(--ink-2);
+  }
+  .cab.vazio { background: transparent; box-shadow: none; border-style: dashed; }
+  .cab.vazio .cab-n b, .cab.vazio .cab-qtd { color: var(--ink-3); }
+
+  /* ---------- cabecalho do armario ---------- */
+  .cab-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--slate);
+    color: var(--slate-ink);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 4px;
+  }
+  .cab-badge {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 62px;
+    height: 62px;
+    border-radius: 10px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-family: var(--font-mono);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .cab-head-txt { min-width: 0; }
+  .cab-head-txt h2 {
+    margin: 0;
+    font-size: .6875rem;
+    font-weight: 650;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--slate-ink-2);
+  }
+  .cab-head-txt p {
+    margin: 3px 0 0;
+    font-family: var(--font-mono);
+    font-size: 1.0625rem;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- prateleiras e itens ---------- */
+  .shelf { margin-top: 26px; }
+  .shelf-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .shelf-tag {
+    font-family: var(--font-mono);
+    font-size: .6875rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    background: var(--surface-2);
+    color: var(--ink-2);
+    border-radius: 4px;
+    padding: 4px 8px;
+  }
+  .shelf-rule { flex: 1; height: 1px; background: var(--line); }
+  .shelf-count {
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .items {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .item {
+    display: grid;
+    grid-template-columns: 58px 1fr;
+    gap: 14px;
+    padding: 12px 14px;
+    border-top: 1px solid var(--line);
+    align-items: start;
+  }
+  .item:first-child { border-top: 0; }
+  .item-qtd {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    line-height: 1.25;
+  }
+  .item-qtd small {
+    display: block;
+    font-size: .5625rem;
+    font-weight: 650;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .item-desc {
+    font-size: .9375rem;
+    font-weight: 550;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+  .item-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 5px;
+  }
+  .ref {
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    color: var(--ink-2);
+    background: var(--surface-2);
+    border-radius: 4px;
+    padding: 2px 6px;
+    overflow-wrap: anywhere;
+  }
+  .where {
+    font-size: .75rem;
+    color: var(--ink-2);
+  }
+  .where b { font-weight: 650; color: var(--ink); }
+
+  /* ---------- pills de status ---------- */
+  .pill {
+    font-size: .6875rem;
+    font-weight: 650;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 3px 9px;
+    white-space: nowrap;
+  }
+  .pill-ok     { background: var(--ok-bg);     color: var(--ok); }
+  .pill-falta  { background: var(--falta-bg);  color: var(--falta); }
+  .pill-sobra  { background: var(--sobra-bg);  color: var(--sobra); }
+  .pill-semcad { background: var(--semcad-bg); color: var(--semcad); }
+
+  /* ---------- conferencia ---------- */
+  .conf-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 14px 0 2px;
+  }
+  .switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: .8125rem;
+    color: var(--ink-2);
+    cursor: pointer;
+    user-select: none;
+  }
+  .switch input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .switch .track {
+    width: 38px;
+    height: 22px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    border: 1px solid var(--line-strong);
+    position: relative;
+    transition: background .15s;
+    flex: none;
+  }
+  .switch .track::after {
+    content: "";
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    transition: transform .15s;
+  }
+  .switch input:checked + .track { background: var(--accent); border-color: var(--accent); }
+  .switch input:checked + .track::after { transform: translateX(16px); border-color: transparent; }
+  .switch input:focus-visible + .track { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .conf-search { flex: 1 1 200px; min-width: 0; }
+  @media (max-width: 460px) {
+    .conf-search { flex: 1 1 100%; }
+  }
+
+  .conf {
+    display: none;
+    gap: 14px;
+    margin-top: 7px;
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-2);
+    flex-wrap: wrap;
+  }
+  body.show-conf .conf { display: flex; }
+  .conf i { font-style: normal; color: var(--ink-3); }
+
+  /* ---------- resumo ---------- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    overflow: hidden;
+  }
+  .stat {
+    background: var(--surface);
+    padding: 13px 14px;
+  }
+  .stat dt {
+    font-size: .625rem;
+    font-weight: 650;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .stat dd {
+    margin: 4px 0 0;
+    font-family: var(--font-mono);
+    font-size: 1.375rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+  .stat dd.neg { color: var(--falta); }
+
+  /* ---------- legenda ---------- */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    font-size: .75rem;
+    color: var(--ink-2);
+    margin-top: 10px;
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+
+  /* ---------- vazio / aviso ---------- */
+  .empty {
+    text-align: center;
+    color: var(--ink-2);
+    background: var(--surface);
+    border: 1px dashed var(--line-strong);
+    border-radius: 11px;
+    padding: 34px 20px;
+    font-size: .9375rem;
+  }
+  .note {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: .8125rem;
+    color: var(--ink-2);
+    margin-bottom: 16px;
+  }
+  .note b { color: var(--ink); }
+
+  /* ---------- QR ---------- */
+  .url-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 16px 0 22px;
+  }
+  .url-field label {
+    font-size: .6875rem;
+    font-weight: 650;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .url-field input {
+    font-family: var(--font-mono);
+    font-size: .8125rem;
+    padding: 11px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--ink);
+    width: 100%;
+  }
+  .qr-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 12px;
+  }
+  .qr-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background: #FFFFFF;
+    border: 1px solid var(--line-strong);
+    border-radius: 10px;
+    padding: 16px 14px 14px;
+    text-align: center;
+  }
+  .qr-card svg { width: 100%; height: auto; max-width: 190px; display: block; }
+  .qr-title {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: .02em;
+    color: #101519;
+  }
+  .qr-sub {
+    font-size: .6875rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #5A6470;
+    font-weight: 600;
+  }
+  .qr-note { font-size: .6875rem; color: #5A6470; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+
+  /* ---------- impressao: folha de QR para colar nos armarios ---------- */
+  @media print {
+    body { background: #fff; color: #000; }
+    .topbar, .no-print { display: none !important; }
+    .wrap { max-width: none; padding: 0; }
+    .qr-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10mm;
+    }
+    .qr-card {
+      break-inside: avoid;
+      border: 1px dashed #999;
+      padding: 8mm 6mm;
+    }
+    .qr-card svg { max-width: 55mm; }
+  }
+</style>
+
+<header class="topbar no-print">
+  <div class="wrap">
+    <div class="topbar-row">
+      <p class="brand"><a href="#/">Disposição de Acessórios</a></p>
+      <p class="stamp">INVENTÁRIO /*{{GERADO}}*/</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="app"></main>
+
+<script>
+/*{{QRJS}}*/
+</script>
+
+<script>
+var DADOS = /*{{DADOS}}*/;
+
+var app = document.getElementById('app');
+
+function esc(s) {
+  return String(s).replace(/[&<>"]/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+  });
+}
+function nf(n) { return Number(n).toLocaleString('pt-BR'); }
+function plural(n, um, muitos) { return n === 1 ? um : muitos; }
+
+var STATUS = {
+  'OK':            { cls: 'ok',     txt: 'Confere' },
+  'FALTA FÍSICA':  { cls: 'falta',  txt: 'Falta física' },
+  'SOBRA FÍSICA':  { cls: 'sobra',  txt: 'Sobra física' },
+  'SEM CADASTRO':  { cls: 'semcad', txt: 'Sem cadastro' }
+};
+
+function pill(status) {
+  var s = STATUS[status];
+  if (!s || s.cls === 'ok') return '';
+  return '<span class="pill pill-' + s.cls + '">' + s.txt + '</span>';
+}
+
+function armario(n) {
+  for (var i = 0; i < DADOS.armarios.length; i++) {
+    if (DADOS.armarios[i].n === n) return DADOS.armarios[i];
+  }
+  return null;
+}
+function totalPecas(a) {
+  return a.itens.reduce(function (s, it) { return s + it.qtd; }, 0);
+}
+
+/* ---------------- busca global ---------------- */
+function todosItens() {
+  var out = [];
+  DADOS.armarios.forEach(function (a) {
+    a.itens.forEach(function (it) {
+      out.push({ arm: a.n, it: it });
+    });
+  });
+  return out;
+}
+
+var RE_ACENTOS = new RegExp('[\\u0300-\\u036f]', 'g');
+function normaliza(s) {
+  return String(s).toLowerCase().normalize('NFD').replace(RE_ACENTOS, '');
+}
+
+function filtra(lista, termo) {
+  var t = normaliza(termo).split(/\s+/).filter(Boolean);
+  if (!t.length) return lista;
+  return lista.filter(function (row) {
+    var it = row.it || row;
+    var alvo = normaliza(it.desc + ' ' + it.ref);
+    return t.every(function (p) { return alvo.indexOf(p) !== -1; });
+  });
+}
+
+/* ---------------- telas ---------------- */
+function viewHome(termo) {
+  var totalRefs = DADOS.resumo.refs;
+  var h = '';
+
+  h += '<div class="search no-print">' +
+    '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>' +
+    '<input id="q" type="search" placeholder="Buscar acessório ou código" value="' + esc(termo || '') + '" autocomplete="off">' +
+    (termo ? '<button class="search-clear" id="qclear" aria-label="Limpar busca">&times;</button>' : '') +
+    '</div>';
+
+  if (termo) {
+    var achados = filtra(todosItens(), termo);
+    h += '<div class="section-label"><span>Resultados</span><span class="count">' + achados.length + '</span></div>';
+    if (!achados.length) {
+      h += '<div class="empty">Nenhum acessório encontrado para <b>' + esc(termo) + '</b>.</div>';
+    } else {
+      h += '<div class="items">';
+      achados.forEach(function (row) {
+        var it = row.it;
+        h += '<div class="item">' +
+          '<div class="item-qtd">' + nf(it.qtd) + '<small>un</small></div>' +
+          '<div>' +
+            '<div class="item-desc">' + esc(it.desc) + '</div>' +
+            '<div class="item-meta">' +
+              '<span class="where">Armário <b>' + row.arm + '</b> · Prateleira <b>' + it.prat + '</b></span>' +
+              '<span class="ref">' + esc(it.ref) + '</span>' +
+              pill(it.status) +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      });
+      h += '</div>';
+    }
+    return h;
+  }
+
+  h += '<div class="section-label"><span>Armários</span><span class="count">' +
+       nf(DADOS.resumo.fisico) + ' peças</span></div>';
+  h += '<div class="cab-grid">';
+  DADOS.armarios.forEach(function (a) {
+    var pecas = totalPecas(a);
+    var vazio = a.itens.length === 0;
+    h += '<a class="cab' + (vazio ? ' vazio' : '') + '" href="#/arm/' + a.n + '">' +
+      '<div class="cab-n"><span>Armário</span><b>' + a.n + '</b></div>' +
+      '<div class="cab-qtd">' + (vazio ? '—' : nf(pecas)) + '</div>' +
+      '<div class="cab-sub">' + (vazio ? 'sem itens' : nf(pecas) + ' ' + plural(pecas, 'peça', 'peças') + ' · ' + a.itens.length + ' ' + plural(a.itens.length, 'ref', 'refs')) + '</div>' +
+      '</a>';
+  });
+  h += '</div>';
+
+  h += '<div class="section-label"><span>Conferência geral</span></div>';
+  h += '<dl class="stats">' +
+    '<div class="stat"><dt>Referências</dt><dd>' + nf(totalRefs) + '</dd></div>' +
+    '<div class="stat"><dt>Físico</dt><dd>' + nf(DADOS.resumo.fisico) + '</dd></div>' +
+    '<div class="stat"><dt>Sistema</dt><dd>' + nf(DADOS.resumo.sistema) + '</dd></div>' +
+    '<div class="stat"><dt>Diferença</dt><dd class="' + (DADOS.resumo.dif < 0 ? 'neg' : '') + '">' +
+      (DADOS.resumo.dif > 0 ? '+' : '') + nf(DADOS.resumo.dif) + '</dd></div>' +
+    '</dl>';
+  h += '<div class="legend">' +
+    '<span><i class="dot" style="background:var(--ok)"></i>Confere</span>' +
+    '<span><i class="dot" style="background:var(--falta)"></i>Falta física</span>' +
+    '<span><i class="dot" style="background:var(--sobra)"></i>Sobra física</span>' +
+    '<span><i class="dot" style="background:var(--semcad)"></i>Sem cadastro</span>' +
+    '</div>';
+
+  h += '<div class="section-label no-print"><span>Etiquetas</span></div>';
+  h += '<a class="btn btn-accent no-print" href="#/qr">Gerar QR Codes dos armários</a>';
+
+  return h;
+}
+
+function viewArmario(n, termo) {
+  var a = armario(n);
+  if (!a) return '<div class="empty">Armário ' + esc(n) + ' não existe.</div>';
+
+  var pecas = totalPecas(a);
+  var h = '';
+
+  h += '<a class="btn btn-ghost no-print" href="#/">&larr; Todos os armários</a>';
+
+  h += '<div class="cab-head">' +
+    '<div class="cab-badge">' + a.n + '</div>' +
+    '<div class="cab-head-txt">' +
+      '<h2>Armário</h2>' +
+      '<p>' + nf(pecas) + ' ' + plural(pecas, 'peça', 'peças') + ' · ' + a.itens.length + ' ' + plural(a.itens.length, 'ref', 'refs') + '</p>' +
+    '</div>' +
+  '</div>';
+
+  if (!a.itens.length) {
+    h += '<div class="section-label"><span>Conteúdo</span></div>';
+    h += '<div class="empty">Este armário está vazio no inventário de ' + esc(DADOS.gerado) + '.</div>';
+    return h;
+  }
+
+  h += '<div class="conf-bar no-print">' +
+    '<div class="search conf-search">' +
+      '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>' +
+      '<input id="q" type="search" placeholder="Filtrar neste armário" value="' + esc(termo || '') + '" autocomplete="off">' +
+      (termo ? '<button class="search-clear" id="qclear" aria-label="Limpar busca">&times;</button>' : '') +
+    '</div>' +
+    '<label class="switch"><input type="checkbox" id="confToggle"><span class="track"></span>Conferência</label>' +
+  '</div>';
+
+  var itens = filtra(a.itens.slice(), termo || '');
+  if (!itens.length) {
+    h += '<div class="empty" style="margin-top:18px">Nenhum item encontrado para <b>' + esc(termo) + '</b> neste armário.</div>';
+    return h;
+  }
+
+  // agrupa por prateleira
+  var prats = [];
+  itens.forEach(function (it) { if (prats.indexOf(it.prat) === -1) prats.push(it.prat); });
+  prats.sort(function (x, y) { return x - y; });
+
+  prats.forEach(function (p) {
+    var doShelf = itens.filter(function (it) { return it.prat === p; });
+    var soma = doShelf.reduce(function (s, it) { return s + it.qtd; }, 0);
+    h += '<section class="shelf">' +
+      '<div class="shelf-head">' +
+        '<span class="shelf-tag">Prateleira ' + p + '</span>' +
+        '<span class="shelf-rule"></span>' +
+        '<span class="shelf-count">' + nf(soma) + ' un</span>' +
+      '</div>' +
+      '<div class="items">';
+    doShelf.forEach(function (it) {
+      h += '<div class="item">' +
+        '<div class="item-qtd">' + nf(it.qtd) + '<small>un</small></div>' +
+        '<div>' +
+          '<div class="item-desc">' + esc(it.desc) + '</div>' +
+          '<div class="item-meta"><span class="ref">' + esc(it.ref) + '</span>' + pill(it.status) + '</div>' +
+          '<div class="conf">' +
+            '<span><i>sistema</i> ' + (it.sistema === null ? '—' : nf(it.sistema)) + '</span>' +
+            '<span><i>diferença</i> ' + (it.dif === null ? '—' : (it.dif > 0 ? '+' : '') + nf(it.dif)) + '</span>' +
+            (it.multi ? '<span><i>total da ref no armário</i> ' + nf(it.refTotal) + '</span>' : '') +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    });
+    h += '</div></section>';
+  });
+
+  return h;
+}
+
+/* localStorage pode ser bloqueado dentro de iframes com origem opaca */
+function guarda(chave, valor) {
+  try {
+    if (valor === undefined) return localStorage.getItem(chave);
+    localStorage.setItem(chave, valor);
+  } catch (e) {}
+  return null;
+}
+
+function baseUrl() {
+  var salvo = guarda('disp_base');
+  if (salvo) return salvo;
+  return location.origin + location.pathname;
+}
+
+/* O endereço só serve para o QR se um celular conseguir abri-lo. */
+function enderecoServe() {
+  if (location.protocol !== 'http:' && location.protocol !== 'https:') return false;
+  var h = location.hostname;
+  if (!h || h === 'localhost' || h === '127.0.0.1' || h === '0.0.0.0') return false;
+  if (location.origin === 'null') return false;
+  return true;
+}
+
+function viewQR() {
+  var base = baseUrl();
+  var h = '';
+
+  h += '<a class="btn btn-ghost no-print" href="#/">&larr; Todos os armários</a>';
+  h += '<div class="section-label"><span>QR Codes dos armários</span></div>';
+
+  h += '<div class="note no-print">' +
+    (enderecoServe()
+      ? '<b>Confira o endereço antes de imprimir.</b> É exatamente ele que vai dentro do QR Code. ' +
+        'Precisa ser o endereço público da página — aquele que abre no celular, fora da sua conta.'
+      : '<b>Este endereço não abre no celular.</b> A página está sendo vista de um arquivo local ' +
+        'ou de um endereço interno. Cole abaixo o endereço público da página antes de imprimir as etiquetas.') +
+    '</div>';
+
+  h += '<div class="url-field no-print">' +
+    '<label for="baseurl">Endereço da página</label>' +
+    '<input id="baseurl" type="url" value="' + esc(base) + '" spellcheck="false" ' +
+      'placeholder="https://…">' +
+    '</div>';
+
+  h += '<div class="conf-bar no-print" style="margin-bottom:16px">' +
+    '<button class="btn btn-accent" id="printBtn">Imprimir etiquetas</button>' +
+    '</div>';
+
+  h += '<div class="qr-grid" id="qrgrid"></div>';
+  return h;
+}
+
+function desenhaQR() {
+  var grid = document.getElementById('qrgrid');
+  if (!grid) return;
+  var base = document.getElementById('baseurl').value.trim();
+  var html = '';
+  DADOS.armarios.forEach(function (a) {
+    var url = base + '#/arm/' + a.n;
+    var svg;
+    try {
+      svg = QR.toSvg(url);
+    } catch (e) {
+      svg = '<p class="qr-note">Endereço longo demais para gerar o QR.</p>';
+    }
+    var pecas = totalPecas(a);
+    html += '<div class="qr-card">' +
+      '<div class="qr-title">ARMÁRIO ' + a.n + '</div>' +
+      svg +
+      '<div class="qr-sub">Aponte a câmera</div>' +
+      '<div class="qr-note">' + (pecas ? nf(pecas) + ' ' + plural(pecas, 'peça', 'peças') : 'vazio') +
+        ' · ' + esc(DADOS.gerado) + '</div>' +
+      '</div>';
+  });
+  grid.innerHTML = html;
+}
+
+/* ---------------- roteamento ---------------- */
+function render() {
+  var hash = location.hash.replace(/^#/, '') || '/';
+  var partes = hash.split('?');
+  var rota = partes[0];
+  var termo = '';
+  if (partes[1]) {
+    var m = /(?:^|&)q=([^&]*)/.exec(partes[1]);
+    if (m) termo = decodeURIComponent(m[1].replace(/\+/g, ' '));
+  }
+
+  var mArm = /^\/arm\/(\d+)$/.exec(rota);
+  if (rota === '/qr') {
+    app.innerHTML = viewQR();
+    document.getElementById('printBtn').addEventListener('click', function () { window.print(); });
+    var inp = document.getElementById('baseurl');
+    var td;
+    function atualiza() {
+      guarda('disp_base', inp.value.trim());
+      desenhaQR();
+    }
+    inp.addEventListener('input', function () {
+      clearTimeout(td);
+      td = setTimeout(atualiza, 250);
+    });
+    inp.addEventListener('change', atualiza);
+    desenhaQR();
+  } else if (mArm) {
+    app.innerHTML = viewArmario(parseInt(mArm[1], 10), termo);
+    ligaBusca(rota);
+    ligaConferencia();
+  } else {
+    app.innerHTML = viewHome(termo);
+    ligaBusca('/');
+  }
+  window.scrollTo(0, 0);
+}
+
+function ligaConferencia() {
+  var tg = document.getElementById('confToggle');
+  if (!tg) return;
+  tg.checked = guarda('disp_conf') === '1';
+  document.body.classList.toggle('show-conf', tg.checked);
+  tg.addEventListener('change', function () {
+    document.body.classList.toggle('show-conf', tg.checked);
+    guarda('disp_conf', tg.checked ? '1' : '0');
+  });
+}
+
+function ligaBusca(rota) {
+  var q = document.getElementById('q');
+  if (!q) return;
+  var t;
+  q.addEventListener('input', function () {
+    clearTimeout(t);
+    t = setTimeout(function () {
+      var v = q.value.trim();
+      var novo = '#' + rota + (v ? '?q=' + encodeURIComponent(v) : '');
+      history.replaceState(null, '', novo);
+      var pos = q.selectionStart;
+      renderMantendoFoco(rota, v, pos);
+    }, 160);
+  });
+  var c = document.getElementById('qclear');
+  if (c) c.addEventListener('click', function () { location.hash = '#' + rota; });
+}
+
+function renderMantendoFoco(rota, termo, pos) {
+  var mArm = /^\/arm\/(\d+)$/.exec(rota);
+  app.innerHTML = mArm ? viewArmario(parseInt(mArm[1], 10), termo) : viewHome(termo);
+  ligaBusca(rota);
+  ligaConferencia();
+  var q = document.getElementById('q');
+  if (q) { q.focus(); try { q.setSelectionRange(pos, pos); } catch (e) {} }
+}
+
+window.addEventListener('hashchange', render);
+render();
+</script>

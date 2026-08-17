@@ -1,0 +1,1302 @@
+<title>Disposição de Acessórios</title>
+<style>
+  /* ---------- tokens: tema claro (estado base, sem marcacao) ---------- */
+  :root {
+    --bg: #F1F3F6;
+    --surface: #FFFFFF;
+    --surface-2: #E7EBF0;
+    --ink: #0F141A;
+    --ink-2: #4B5661;
+    --ink-3: #78838F;
+    --line: #D5DBE2;
+    --line-strong: #B9C2CC;
+    --slate: #1A242C;
+    --slate-ink: #F4F7F9;
+    --slate-ink-2: #9FAEBA;
+    --accent: #E9A400;
+    --accent-ink: #241A00;
+    --ok: #10643A;        --ok-bg: #DCEFE4;
+    --falta: #A42116;     --falta-bg: #F8DFDD;
+    --sobra: #17518F;     --sobra-bg: #DCE8F7;
+    --semcad: #514A5E;    --semcad-bg: #E6E3EC;
+    --shadow: 0 1px 2px rgba(15,20,26,.06), 0 8px 20px -12px rgba(15,20,26,.18);
+
+    --font-sans: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "Cascadia Mono", "Segoe UI Mono", "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0D1216;
+      --surface: #151C22;
+      --surface-2: #1D262E;
+      --ink: #E7EDF2;
+      --ink-2: #A2ADB8;
+      --ink-3: #78838E;
+      --line: #29343D;
+      --line-strong: #3A4650;
+      --slate: #070A0D;
+      --slate-ink: #EEF2F5;
+      --slate-ink-2: #8B9AA6;
+      --accent: #FFC22E;
+      --accent-ink: #1F1600;
+      --ok: #5CC38B;        --ok-bg: #10301F;
+      --falta: #F08A7E;     --falta-bg: #3A1512;
+      --sobra: #7FB4EF;     --sobra-bg: #10263D;
+      --semcad: #B3A9C4;    --semcad-bg: #241F2C;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 24px -14px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0D1216;
+    --surface: #151C22;
+    --surface-2: #1D262E;
+    --ink: #E7EDF2;
+    --ink-2: #A2ADB8;
+    --ink-3: #78838E;
+    --line: #29343D;
+    --line-strong: #3A4650;
+    --slate: #070A0D;
+    --slate-ink: #EEF2F5;
+    --slate-ink-2: #8B9AA6;
+    --accent: #FFC22E;
+    --accent-ink: #1F1600;
+    --ok: #5CC38B;        --ok-bg: #10301F;
+    --falta: #F08A7E;     --falta-bg: #3A1512;
+    --sobra: #7FB4EF;     --sobra-bg: #10263D;
+    --semcad: #B3A9C4;    --semcad-bg: #241F2C;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 24px -14px rgba(0,0,0,.7);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 16px 72px;
+  }
+
+  a { color: inherit; }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  /* ---------- barra superior ---------- */
+  .topbar {
+    background: var(--slate);
+    color: var(--slate-ink);
+    padding: 14px 0 16px;
+    margin-bottom: 20px;
+  }
+  .topbar .wrap { padding-bottom: 0; }
+  .topbar-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    font-size: 1.0625rem;
+    font-weight: 650;
+    letter-spacing: -.01em;
+    margin: 0;
+  }
+  .brand a { text-decoration: none; }
+  .stamp {
+    font-family: var(--font-mono);
+    font-size: .6875rem;
+    color: var(--slate-ink-2);
+    letter-spacing: .02em;
+  }
+
+  /* ---------- botoes ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font: inherit;
+    font-size: .875rem;
+    font-weight: 550;
+    padding: 8px 14px;
+    border-radius: 7px;
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    color: var(--ink);
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .btn:hover { background: var(--surface-2); }
+  .btn-accent {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+  }
+  .btn-accent:hover { filter: brightness(1.06); background: var(--accent); }
+  .btn-ghost {
+    background: transparent;
+    border-color: transparent;
+    color: var(--ink-2);
+    padding-left: 0;
+  }
+  .btn-ghost:hover { background: transparent; color: var(--ink); }
+
+  /* ---------- busca ---------- */
+  .search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 0 12px;
+    box-shadow: var(--shadow);
+  }
+  .search svg { flex: none; color: var(--ink-3); }
+  .search input {
+    font: inherit;
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    padding: 13px 10px;
+    outline: none;
+  }
+  .search input::placeholder { color: var(--ink-3); }
+  .search-clear {
+    border: 0;
+    background: transparent;
+    color: var(--ink-3);
+    font: inherit;
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 4px 2px;
+  }
+  .search-clear:hover { color: var(--ink); }
+
+  /* ---------- secoes ---------- */
+  .section-label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: .6875rem;
+    font-weight: 650;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 30px 0 10px;
+  }
+  .section-label .count {
+    font-family: var(--font-mono);
+    letter-spacing: .02em;
+  }
+
+  /* ---------- grade de armarios ---------- */
+  .cab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+  }
+  .cab {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    padding: 14px 14px 13px;
+    text-decoration: none;
+    box-shadow: var(--shadow);
+  }
+  .cab:hover { border-color: var(--line-strong); }
+  .cab-n {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+  }
+  .cab-n b {
+    font-family: var(--font-mono);
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -.02em;
+  }
+  .cab-n span {
+    font-size: .625rem;
+    font-weight: 650;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .cab-qtd {
+    font-family: var(--font-mono);
+    font-size: 1.0625rem;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+    margin-top: 8px;
+  }
+  .cab-sub {
+    font-size: .75rem;
+    color: var(--ink-2);
+  }
+  .cab.vazio { background: transparent; box-shadow: none; border-style: dashed; }
+  .cab.vazio .cab-n b, .cab.vazio .cab-qtd { color: var(--ink-3); }
+
+  /* ---------- cabecalho do armario ---------- */
+  .cab-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--slate);
+    color: var(--slate-ink);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 4px;
+  }
+  .cab-badge {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 62px;
+    height: 62px;
+    border-radius: 10px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-family: var(--font-mono);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .cab-head-txt { min-width: 0; }
+  .cab-head-txt h2 {
+    margin: 0;
+    font-size: .6875rem;
+    font-weight: 650;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--slate-ink-2);
+  }
+  .cab-head-txt p {
+    margin: 3px 0 0;
+    font-family: var(--font-mono);
+    font-size: 1.0625rem;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- prateleiras e itens ---------- */
+  .shelf { margin-top: 26px; }
+  .shelf-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .shelf-tag {
+    font-family: var(--font-mono);
+    font-size: .6875rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    background: var(--surface-2);
+    color: var(--ink-2);
+    border-radius: 4px;
+    padding: 4px 8px;
+  }
+  .shelf-rule { flex: 1; height: 1px; background: var(--line); }
+  .shelf-count {
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .items {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .item {
+    display: grid;
+    grid-template-columns: 58px 1fr;
+    gap: 14px;
+    padding: 12px 14px;
+    border-top: 1px solid var(--line);
+    align-items: start;
+  }
+  .item:first-child { border-top: 0; }
+  .item-qtd {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    line-height: 1.25;
+  }
+  .item-qtd small {
+    display: block;
+    font-size: .5625rem;
+    font-weight: 650;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .item-desc {
+    font-size: .9375rem;
+    font-weight: 550;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+  .item-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 5px;
+  }
+  .ref {
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    color: var(--ink-2);
+    background: var(--surface-2);
+    border-radius: 4px;
+    padding: 2px 6px;
+    overflow-wrap: anywhere;
+  }
+  .where {
+    font-size: .75rem;
+    color: var(--ink-2);
+  }
+  .where b { font-weight: 650; color: var(--ink); }
+
+  /* ---------- pills de status ---------- */
+  .pill {
+    font-size: .6875rem;
+    font-weight: 650;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 3px 9px;
+    white-space: nowrap;
+  }
+  .pill-ok     { background: var(--ok-bg);     color: var(--ok); }
+  .pill-falta  { background: var(--falta-bg);  color: var(--falta); }
+  .pill-sobra  { background: var(--sobra-bg);  color: var(--sobra); }
+  .pill-semcad { background: var(--semcad-bg); color: var(--semcad); }
+
+  /* ---------- conferencia ---------- */
+  .conf-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 14px 0 2px;
+  }
+  .switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: .8125rem;
+    color: var(--ink-2);
+    cursor: pointer;
+    user-select: none;
+  }
+  .switch input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .switch .track {
+    width: 38px;
+    height: 22px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    border: 1px solid var(--line-strong);
+    position: relative;
+    transition: background .15s;
+    flex: none;
+  }
+  .switch .track::after {
+    content: "";
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    transition: transform .15s;
+  }
+  .switch input:checked + .track { background: var(--accent); border-color: var(--accent); }
+  .switch input:checked + .track::after { transform: translateX(16px); border-color: transparent; }
+  .switch input:focus-visible + .track { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .conf-search { flex: 1 1 200px; min-width: 0; }
+  @media (max-width: 460px) {
+    .conf-search { flex: 1 1 100%; }
+  }
+
+  .conf {
+    display: none;
+    gap: 14px;
+    margin-top: 7px;
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-2);
+    flex-wrap: wrap;
+  }
+  body.show-conf .conf { display: flex; }
+  .conf i { font-style: normal; color: var(--ink-3); }
+
+  /* ---------- resumo ---------- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    overflow: hidden;
+  }
+  .stat {
+    background: var(--surface);
+    padding: 13px 14px;
+  }
+  .stat dt {
+    font-size: .625rem;
+    font-weight: 650;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .stat dd {
+    margin: 4px 0 0;
+    font-family: var(--font-mono);
+    font-size: 1.375rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+  .stat dd.neg { color: var(--falta); }
+
+  /* ---------- legenda ---------- */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    font-size: .75rem;
+    color: var(--ink-2);
+    margin-top: 10px;
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+
+  /* ---------- vazio / aviso ---------- */
+  .empty {
+    text-align: center;
+    color: var(--ink-2);
+    background: var(--surface);
+    border: 1px dashed var(--line-strong);
+    border-radius: 11px;
+    padding: 34px 20px;
+    font-size: .9375rem;
+  }
+  .note {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: .8125rem;
+    color: var(--ink-2);
+    margin-bottom: 16px;
+  }
+  .note b { color: var(--ink); }
+
+  /* ---------- QR ---------- */
+  .url-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 16px 0 22px;
+  }
+  .url-field label {
+    font-size: .6875rem;
+    font-weight: 650;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .url-field input {
+    font-family: var(--font-mono);
+    font-size: .8125rem;
+    padding: 11px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--ink);
+    width: 100%;
+  }
+  .qr-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 12px;
+  }
+  .qr-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background: #FFFFFF;
+    border: 1px solid var(--line-strong);
+    border-radius: 10px;
+    padding: 16px 14px 14px;
+    text-align: center;
+  }
+  .qr-card svg { width: 100%; height: auto; max-width: 190px; display: block; }
+  .qr-title {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: .02em;
+    color: #101519;
+  }
+  .qr-sub {
+    font-size: .6875rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #5A6470;
+    font-weight: 600;
+  }
+  .qr-note { font-size: .6875rem; color: #5A6470; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+
+  /* ---------- impressao: folha de QR para colar nos armarios ---------- */
+  @media print {
+    body { background: #fff; color: #000; }
+    .topbar, .no-print { display: none !important; }
+    .wrap { max-width: none; padding: 0; }
+    .qr-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10mm;
+    }
+    .qr-card {
+      break-inside: avoid;
+      border: 1px dashed #999;
+      padding: 8mm 6mm;
+    }
+    .qr-card svg { max-width: 55mm; }
+  }
+</style>
+
+<header class="topbar no-print">
+  <div class="wrap">
+    <div class="topbar-row">
+      <p class="brand"><a href="#/">Disposição de Acessórios</a></p>
+      <p class="stamp">INVENTÁRIO 17/08/2026</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="app"></main>
+
+<script>
+/* Gerador de QR Code (modo byte, nivel de correcao M, versoes 1-10).
+   Implementacao propria, sem dependencias externas. Retorna SVG. */
+var QR = (function () {
+  var EXP = new Uint8Array(512), LOG = new Uint8Array(256);
+  (function () {
+    var x = 1;
+    for (var i = 0; i < 255; i++) { EXP[i] = x; LOG[x] = i; x <<= 1; if (x & 0x100) x ^= 0x11d; }
+    for (var j = 255; j < 512; j++) EXP[j] = EXP[j - 255];
+  })();
+
+  function mul(a, b) { return (a === 0 || b === 0) ? 0 : EXP[LOG[a] + LOG[b]]; }
+
+  function rsGen(n) {
+    var p = [1];
+    for (var i = 0; i < n; i++) {
+      var np = new Array(p.length + 1);
+      for (var k = 0; k < np.length; k++) np[k] = 0;
+      for (var j = 0; j < p.length; j++) {
+        np[j] ^= p[j];
+        np[j + 1] ^= mul(p[j], EXP[i]);
+      }
+      p = np;
+    }
+    return p;
+  }
+
+  function rsRemainder(data, ecLen) {
+    var gen = rsGen(ecLen);
+    var buf = new Uint8Array(data.length + ecLen);
+    buf.set(data);
+    for (var i = 0; i < data.length; i++) {
+      var c = buf[i];
+      if (c !== 0) for (var j = 0; j < gen.length; j++) buf[i + j] ^= mul(gen[j], c);
+    }
+    return buf.subarray(data.length);
+  }
+
+  // [totalCodewords, ecPorBloco, g1Blocos, g1Dados, g2Blocos, g2Dados] - nivel M
+  var SPEC = {
+    1:  [26,  10, 1, 16, 0, 0],
+    2:  [44,  16, 1, 28, 0, 0],
+    3:  [70,  26, 1, 44, 0, 0],
+    4:  [100, 18, 2, 32, 0, 0],
+    5:  [134, 24, 2, 43, 0, 0],
+    6:  [172, 16, 4, 27, 0, 0],
+    7:  [196, 18, 4, 31, 0, 0],
+    8:  [242, 22, 2, 38, 2, 39],
+    9:  [292, 22, 3, 36, 2, 37],
+    10: [346, 26, 4, 43, 1, 44]
+  };
+  var ALIGN = {
+    1: [], 2: [6, 18], 3: [6, 22], 4: [6, 26], 5: [6, 30],
+    6: [6, 34], 7: [6, 22, 38], 8: [6, 24, 42], 9: [6, 26, 46], 10: [6, 28, 50]
+  };
+
+  function dataCapacity(v) {
+    var s = SPEC[v];
+    var cw = s[2] * s[3] + s[4] * s[5];
+    var overhead = 4 + (v < 10 ? 8 : 16);
+    return Math.floor((cw * 8 - overhead) / 8);
+  }
+
+  function utf8Bytes(str) {
+    var out = [];
+    for (var i = 0; i < str.length; i++) {
+      var c = str.charCodeAt(i);
+      if (c < 0x80) out.push(c);
+      else if (c < 0x800) { out.push(0xc0 | (c >> 6), 0x80 | (c & 63)); }
+      else if (c >= 0xd800 && c <= 0xdbff && i + 1 < str.length) {
+        var c2 = str.charCodeAt(++i);
+        var cp = 0x10000 + ((c - 0xd800) << 10) + (c2 - 0xdc00);
+        out.push(0xf0 | (cp >> 18), 0x80 | ((cp >> 12) & 63), 0x80 | ((cp >> 6) & 63), 0x80 | (cp & 63));
+      } else { out.push(0xe0 | (c >> 12), 0x80 | ((c >> 6) & 63), 0x80 | (c & 63)); }
+    }
+    return out;
+  }
+
+  function bch(value, poly, bits) {
+    var v = value << (bits - 1);
+    var polyBits = 0, t = poly;
+    while (t) { polyBits++; t >>= 1; }
+    while (true) {
+      var vb = 0, u = v;
+      while (u) { vb++; u >>= 1; }
+      if (vb < polyBits) break;
+      v ^= poly << (vb - polyBits);
+    }
+    return (value << (bits - 1)) | v;
+  }
+
+  function maskFn(mask, r, c) {
+    switch (mask) {
+      case 0: return (r + c) % 2 === 0;
+      case 1: return r % 2 === 0;
+      case 2: return c % 3 === 0;
+      case 3: return (r + c) % 3 === 0;
+      case 4: return (Math.floor(r / 2) + Math.floor(c / 3)) % 2 === 0;
+      case 5: return ((r * c) % 2) + ((r * c) % 3) === 0;
+      case 6: return (((r * c) % 2) + ((r * c) % 3)) % 2 === 0;
+      default: return (((r + c) % 2) + ((r * c) % 3)) % 2 === 0;
+    }
+  }
+
+  // test=true: modulos de formato ficam claros (usado so para pontuar mascaras)
+  function buildMatrix(version, codewords, mask, test) {
+    var size = version * 4 + 17;
+    var m = [], reserved = [];
+    for (var i = 0; i < size; i++) {
+      m.push(new Uint8Array(size));
+      reserved.push(new Uint8Array(size));
+    }
+
+    function finder(r, c) {
+      for (var dr = -1; dr <= 7; dr++) for (var dc = -1; dc <= 7; dc++) {
+        var rr = r + dr, cc = c + dc;
+        if (rr < 0 || cc < 0 || rr >= size || cc >= size) continue;
+        var inner = (dr >= 0 && dr <= 6 && dc >= 0 && dc <= 6) &&
+          (dr === 0 || dr === 6 || dc === 0 || dc === 6 || (dr >= 2 && dr <= 4 && dc >= 2 && dc <= 4));
+        m[rr][cc] = inner ? 1 : 0;
+        reserved[rr][cc] = 1;
+      }
+    }
+    finder(0, 0); finder(0, size - 7); finder(size - 7, 0);
+
+    // padroes de sincronismo
+    for (var k = 8; k < size - 8; k++) {
+      var bit = (k % 2 === 0) ? 1 : 0;
+      m[6][k] = bit; reserved[6][k] = 1;
+      m[k][6] = bit; reserved[k][6] = 1;
+    }
+
+    // padroes de alinhamento
+    var pos = ALIGN[version];
+    for (var a = 0; a < pos.length; a++) for (var b = 0; b < pos.length; b++) {
+      var ar = pos[a], ac = pos[b];
+      if ((ar <= 8 && ac <= 8) || (ar <= 8 && ac >= size - 9) || (ar >= size - 9 && ac <= 8)) continue;
+      for (var dr2 = -2; dr2 <= 2; dr2++) for (var dc2 = -2; dc2 <= 2; dc2++) {
+        m[ar + dr2][ac + dc2] = (Math.max(Math.abs(dr2), Math.abs(dc2)) !== 1) ? 1 : 0;
+        reserved[ar + dr2][ac + dc2] = 1;
+      }
+    }
+
+    // modulo escuro fixo + area de formato reservada
+    m[size - 8][8] = 1; reserved[size - 8][8] = 1;
+    for (var f = 0; f <= 8; f++) {
+      if (f !== 6) { reserved[8][f] = 1; reserved[f][8] = 1; }
+    }
+    for (var g = 0; g < 8; g++) { reserved[8][size - 1 - g] = 1; reserved[size - 1 - g][8] = 1; }
+
+    // informacao de versao (v >= 7)
+    if (version >= 7) {
+      var vinfo = bch(version, 0x1f25, 13);
+      for (var i2 = 0; i2 < 18; i2++) {
+        var bitv = (vinfo >> i2) & 1;
+        var rr2 = Math.floor(i2 / 3), cc2 = i2 % 3;
+        m[rr2][size - 11 + cc2] = bitv; reserved[rr2][size - 11 + cc2] = 1;
+        m[size - 11 + cc2][rr2] = bitv; reserved[size - 11 + cc2][rr2] = 1;
+      }
+    }
+
+    // dados em zigue-zague
+    var bitIdx = 0, total = codewords.length * 8;
+    var upward = true;
+    for (var col = size - 1; col > 0; col -= 2) {
+      if (col === 6) col--;
+      for (var n = 0; n < size; n++) {
+        var row = upward ? (size - 1 - n) : n;
+        for (var s = 0; s < 2; s++) {
+          var c3 = col - s;
+          if (reserved[row][c3]) continue;
+          var v2 = 0;
+          if (bitIdx < total) v2 = (codewords[bitIdx >> 3] >> (7 - (bitIdx & 7))) & 1;
+          bitIdx++;
+          if (maskFn(mask, row, c3)) v2 ^= 1;
+          m[row][c3] = v2;
+        }
+      }
+      upward = !upward;
+    }
+
+    // informacao de formato (nivel M = 0b00), MSB primeiro
+    var fmt = bch((0 << 3) | mask, 0x537, 11) ^ 0x5412;
+    for (var i3 = 0; i3 < 15; i3++) {
+      var bf = test ? 0 : ((fmt >> (14 - i3)) & 1);
+      if (i3 < 6) m[8][i3] = bf;
+      else if (i3 === 6) m[8][7] = bf;
+      else if (i3 === 7) m[8][8] = bf;
+      else if (i3 === 8) m[7][8] = bf;
+      else m[14 - i3][8] = bf;
+
+      // copia 2: 7 modulos verticais, 1 em (8, size-8), 7 horizontais
+      if (i3 < 7) m[size - 1 - i3][8] = bf;
+      else if (i3 === 7) m[8][size - 8] = bf;
+      else m[8][size - 15 + i3] = bf;
+    }
+    m[size - 8][8] = test ? 0 : 1; // modulo escuro fixo
+    return m;
+  }
+
+  function penalty(m) {
+    var size = m.length, score = 0, i, j, run, last;
+    for (i = 0; i < size; i++) {
+      run = 1; last = m[i][0];
+      for (j = 1; j < size; j++) {
+        if (m[i][j] === last) run++;
+        else { if (run >= 5) score += 3 + (run - 5); run = 1; last = m[i][j]; }
+      }
+      if (run >= 5) score += 3 + (run - 5);
+      run = 1; last = m[0][i];
+      for (j = 1; j < size; j++) {
+        if (m[j][i] === last) run++;
+        else { if (run >= 5) score += 3 + (run - 5); run = 1; last = m[j][i]; }
+      }
+      if (run >= 5) score += 3 + (run - 5);
+    }
+    for (i = 0; i < size - 1; i++) for (j = 0; j < size - 1; j++) {
+      var v = m[i][j];
+      if (v === m[i][j + 1] && v === m[i + 1][j] && v === m[i + 1][j + 1]) score += 3;
+    }
+    var pat = [1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0];
+    var patR = [0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1];
+    function check(get, len) {
+      for (var s = 0; s + 11 <= len; s++) {
+        var okA = true, okB = true;
+        for (var t = 0; t < 11; t++) {
+          if (get(s + t) !== pat[t]) okA = false;
+          if (get(s + t) !== patR[t]) okB = false;
+        }
+        if (okA || okB) score += 40;
+      }
+    }
+    for (i = 0; i < size; i++) {
+      (function (row) { check(function (x) { return m[row][x]; }, size); })(i);
+      (function (col) { check(function (x) { return m[x][col]; }, size); })(i);
+    }
+    var dark = 0;
+    for (i = 0; i < size; i++) for (j = 0; j < size; j++) dark += m[i][j];
+    var pct = (dark * 100) / (size * size);
+    score += Math.floor(Math.abs(pct - 50) / 5) * 10;
+    return score;
+  }
+
+  function encode(text) {
+    var bytes = utf8Bytes(text);
+    var version = 0;
+    for (var v = 1; v <= 10; v++) { if (bytes.length <= dataCapacity(v)) { version = v; break; } }
+    if (!version) throw new Error('Texto longo demais para QR versao 10');
+
+    var spec = SPEC[version];
+    var ecLen = spec[1], g1n = spec[2], g1d = spec[3], g2n = spec[4], g2d = spec[5];
+    var totalData = g1n * g1d + g2n * g2d;
+
+    var bits = [];
+    function push(val, len) { for (var i = len - 1; i >= 0; i--) bits.push((val >> i) & 1); }
+    push(4, 4);
+    push(bytes.length, version < 10 ? 8 : 16);
+    for (var i = 0; i < bytes.length; i++) push(bytes[i], 8);
+    var cap = totalData * 8;
+    for (var t = 0; t < 4 && bits.length < cap; t++) bits.push(0);
+    while (bits.length % 8 !== 0) bits.push(0);
+    var pad = [0xec, 0x11], pi = 0;
+    while (bits.length < cap) push(pad[pi++ % 2], 8);
+
+    var data = new Uint8Array(totalData);
+    for (var b = 0; b < totalData; b++) {
+      var byteVal = 0;
+      for (var k = 0; k < 8; k++) byteVal = (byteVal << 1) | bits[b * 8 + k];
+      data[b] = byteVal;
+    }
+
+    var blocks = [], ecs = [], off = 0, n;
+    for (n = 0; n < g1n; n++) { blocks.push(data.subarray(off, off + g1d)); off += g1d; }
+    for (n = 0; n < g2n; n++) { blocks.push(data.subarray(off, off + g2d)); off += g2d; }
+    for (n = 0; n < blocks.length; n++) ecs.push(rsRemainder(blocks[n], ecLen));
+
+    var out = [];
+    var maxData = Math.max(g1d, g2n ? g2d : 0);
+    for (var c = 0; c < maxData; c++) for (n = 0; n < blocks.length; n++) if (c < blocks[n].length) out.push(blocks[n][c]);
+    for (var e = 0; e < ecLen; e++) for (n = 0; n < ecs.length; n++) out.push(ecs[n][e]);
+    var cw = new Uint8Array(spec[0]);
+    cw.set(out.slice(0, spec[0]));
+
+    var bestMask = 0, bestScore = Infinity;
+    for (var mk = 0; mk < 8; mk++) {
+      var sc = penalty(buildMatrix(version, cw, mk, true));
+      if (sc < bestScore) { bestScore = sc; bestMask = mk; }
+    }
+    return buildMatrix(version, cw, bestMask, false);
+  }
+
+  function toSvg(text, opts) {
+    opts = opts || {};
+    var quiet = opts.quiet == null ? 4 : opts.quiet;
+    var m = encode(text);
+    var size = m.length, total = size + quiet * 2;
+    var path = '';
+    for (var r = 0; r < size; r++) {
+      var c = 0;
+      while (c < size) {
+        if (m[r][c]) {
+          var start = c;
+          while (c < size && m[r][c]) c++;
+          path += 'M' + (start + quiet) + ' ' + (r + quiet) + 'h' + (c - start) + 'v1h-' + (c - start) + 'z';
+        } else c++;
+      }
+    }
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + total + ' ' + total +
+      '" shape-rendering="crispEdges" role="img" aria-label="QR Code"><rect width="' + total +
+      '" height="' + total + '" fill="#ffffff"/><path d="' + path + '" fill="#000000"/></svg>';
+  }
+
+  return { toSvg: toSvg, encode: encode };
+})();
+
+</script>
+
+<script>
+var DADOS = {"gerado": "17/08/2026", "armarios": [{"n": 1, "itens": []}, {"n": 2, "itens": []}, {"n": 3, "itens": []}, {"n": 4, "itens": [{"ref": "6925281946165-HI", "qtd": 24, "desc": "FONE DE OUVIDO C50HI JBL - PRETO", "prat": 1, "sistema": 23, "dif": 1, "status": "SOBRA FÍSICA", "multi": false, "refTotal": 24}, {"ref": "4968929221554", "qtd": 38, "desc": "FONE DE OUVIDO JBL TUNE 310C - PRETO", "prat": 1, "sistema": 37, "dif": 1, "status": "SOBRA FÍSICA", "multi": false, "refTotal": 38}, {"ref": "4968929225040", "qtd": 11, "desc": "FONE DE OUVIDO T110 JBL - PRETO", "prat": 1, "sistema": 11, "dif": 0, "status": "OK", "multi": false, "refTotal": 11}, {"ref": "1200130035920", "qtd": 1, "desc": "FONE JBL TUNE780NC - BLACK", "prat": 2, "sistema": 1, "dif": 0, "status": "OK", "multi": false, "refTotal": 1}, {"ref": "4968929222636", "qtd": 44, "desc": "FONE TWS JBL WAVE BUDS 2 - PRETO", "prat": 2, "sistema": 59, "dif": -15, "status": "FALTA FÍSICA", "multi": false, "refTotal": 44}, {"ref": "4968929220779", "qtd": 12, "desc": "CAIXA DE SOM JBL GO 4  - AZUL", "prat": 3, "sistema": 12, "dif": 0, "status": "OK", "multi": false, "refTotal": 12}, {"ref": "1200130034558", "qtd": 1, "desc": "CAIXA DE SOM JBL GO 5 - PRETO", "prat": 3, "sistema": 0, "dif": 1, "status": "SEM CADASTRO", "multi": false, "refTotal": 1}, {"ref": "4968929221318", "qtd": 56, "desc": "CAIXA DE SOM JBL CLIP 5 - PRETO", "prat": 4, "sistema": 44, "dif": 12, "status": "SOBRA FÍSICA", "multi": false, "refTotal": 56}]}, {"n": 5, "itens": [{"ref": "TM04014268", "qtd": 2, "desc": "ADAPTADOR LIGHTNING APPLE 3.5MM-BRAN AAT", "prat": 1, "sistema": 2, "dif": 0, "status": "OK", "multi": false, "refTotal": 2}, {"ref": "190198914507-C", "qtd": 33, "desc": "CABO DE C/C TRANCADO (1M) GENUINO - APPLE", "prat": 1, "sistema": 44, "dif": -11, "status": "FALTA FÍSICA", "multi": false, "refTotal": 33}, {"ref": "194252750858", "qtd": 1, "desc": "CABO DE USB-C PARA LIGHTNING 1M APPLE", "prat": 1, "sistema": 1, "dif": 0, "status": "OK", "multi": false, "refTotal": 1}, {"ref": "7899085394837", "qtd": 2, "desc": "FONE BLUETOOTH TWS BRANCO T12 - LITY", "prat": 1, "sistema": 0, "dif": 2, "status": "SEM CADASTRO", "multi": false, "refTotal": 2}, {"ref": "7899085394820", "qtd": 3, "desc": "FONE BLUETOOTH TWS PRETO T12 - LITY", "prat": 1, "sistema": 0, "dif": 3, "status": "SEM CADASTRO", "multi": false, "refTotal": 3}, {"ref": "195949776229", "qtd": 12, "desc": "FONE DE OUVIDO IN-EAR APPLE EARPODS USB-C - APPLE", "prat": 1, "sistema": 5, "dif": 7, "status": "SOBRA FÍSICA", "multi": false, "refTotal": 12}, {"ref": "190198001702", "qtd": 12, "desc": "FONE DE OUVIDO IN-EAR APPLE EARPODS WITH LIGHTNING CONNECTOR BRANCO", "prat": 1, "sistema": 12, "dif": 0, "status": "OK", "multi": false, "refTotal": 12}, {"ref": "619659149598", "qtd": 2, "desc": "ULTRA DUAL USB DRIVE 3.0 32GB- SANDISK", "prat": 1, "sistema": 2, "dif": 0, "status": "OK", "multi": false, "refTotal": 2}, {"ref": "6972431710657", "qtd": 24, "desc": "FONE DE OUVIDO IN-EAR HP P2 DH700 - BRANCO", "prat": 2, "sistema": 24, "dif": 0, "status": "OK", "multi": false, "refTotal": 24}, {"ref": "SKIN", "qtd": 31, "desc": "PELICULA AMET TRASEIRA SKIN DIVERSOS", "prat": 2, "sistema": 51, "dif": -20, "status": "FALTA FÍSICA", "multi": false, "refTotal": 31}, {"ref": "ULTRAUV", "qtd": 40, "desc": "PELICULA AMET ULTRA UV HD", "prat": 2, "sistema": 40, "dif": 0, "status": "OK", "multi": false, "refTotal": 40}, {"ref": "MATTE", "qtd": 210, "desc": "PELICULA AMET FOSCA MATTE", "prat": 3, "sistema": 213, "dif": -3, "status": "FALTA FÍSICA", "multi": false, "refTotal": 210}, {"ref": "PRIVACIDADE", "qtd": 120, "desc": "PELICULA AMET PRIVACIDADE ANTI-SPY NANOTECH", "prat": 3, "sistema": 128, "dif": -8, "status": "FALTA FÍSICA", "multi": false, "refTotal": 120}, {"ref": "DEVTRANSPARENTE", "qtd": 168, "desc": "PELICULA DEVIA TRANSPARENTE", "prat": 3, "sistema": 168, "dif": 0, "status": "OK", "multi": false, "refTotal": 168}]}, {"n": 6, "itens": [{"ref": "7898739501515", "qtd": 14, "desc": "CABO EM SILICONE USB-A PARA LIGHTNING 1,5M - GEONAV", "prat": 1, "sistema": 25, "dif": 14, "status": "SOBRA FÍSICA", "multi": true, "refTotal": 39}, {"ref": "ESLICSBK-C/L", "qtd": 11, "desc": "CABO EM SILICONE USB-C PARA LIGHTNING 1,5M - GEONAV", "prat": 1, "sistema": 0, "dif": 11, "status": "SEM CADASTRO", "multi": false, "refTotal": 11}, {"ref": "CH48PDQCWT-48W", "qtd": 19, "desc": "CARREGADOR DE PAREDE 2 SAÍDAS USB-A E USB-C GEONAV 48W", "prat": 1, "sistema": 7, "dif": 12, "status": "SOBRA FÍSICA", "multi": false, "refTotal": 19}, {"ref": "CH2OPDQC-20W", "qtd": 16, "desc": "SUPER POWER DUO CARREGAMENTO ULTRA RÁPIDO PD 20W + QC 3.0 BRANCO- GEONAV", "prat": 1, "sistema": 15, "dif": 1, "status": "SOBRA FÍSICA", "multi": false, "refTotal": 16}, {"ref": "7898739501522", "qtd": 40, "desc": "CABO USB-A PARA LIGHTNING MFI EM SILICONE, 1,5M BRANCO - GEONAV", "prat": 2, "sistema": 43, "dif": -3, "status": "FALTA FÍSICA", "multi": false, "refTotal": 40}, {"ref": "PB10K20WSG-10000", "qtd": 41, "desc": "CARREGADOR PORTÁTIL 10.000MAH C/ CARREGAMENTO RÁPIDO CINZA ESPACIAL - GEONAV", "prat": 2, "sistema": 41, "dif": 0, "status": "OK", "multi": false, "refTotal": 41}, {"ref": "7898564049923", "qtd": 12, "desc": "CARREGADOR PORTÁTIL 10.000MAH C/ CARREGAMENTO RÁPIDO ROSA - GEONAV", "prat": 2, "sistema": 11, "dif": 1, "status": "SOBRA FÍSICA", "multi": false, "refTotal": 12}, {"ref": "7898564048889", "qtd": 22, "desc": "SUPER POWER DUO CARREGAMENTO ULTRA RÁPIDO PD 20W + QC 3.0 PRETO - GEONAV", "prat": 2, "sistema": 21, "dif": 1, "status": "SOBRA FÍSICA", "multi": false, "refTotal": 22}, {"ref": "7898739501461", "qtd": 27, "desc": "CABO EM SILICONE USB-A PARA USB-C 1,5M BRANCO - GEONAV", "prat": 3, "sistema": 22, "dif": 5, "status": "SOBRA FÍSICA", "multi": false, "refTotal": 27}, {"ref": "7898739501553", "qtd": 13, "desc": "CABO EM SILICONE USB-C PARA LIGHTNING 1,5M BRANCO - GEONAV", "prat": 3, "sistema": 21, "dif": -8, "status": "FALTA FÍSICA", "multi": false, "refTotal": 13}, {"ref": "AER16BK-TWS", "qtd": 390, "desc": "STYLEBEATS FONES DE OUVIDO TWS - GEONAV", "prat": 3, "sistema": 401, "dif": -11, "status": "FALTA FÍSICA", "multi": false, "refTotal": 390}, {"ref": "7898739501515", "qtd": 25, "desc": "CABO EM SILICONE USB-A PARA LIGHTNING 1,5M - GEONAV", "prat": 4, "sistema": 25, "dif": 14, "status": "SOBRA FÍSICA", "multi": true, "refTotal": 39}, {"ref": "CHV2OPDQCSG-20W", "qtd": 17, "desc": "CARREGADOR VEICULAR DE ALUMÍNIO COM 2 PORTAS 20W CINZA - GEONAV", "prat": 4, "sistema": 31, "dif": -14, "status": "FALTA FÍSICA", "multi": false, "refTotal": 17}, {"ref": "PB5KALMAGSV-500", "qtd": 24, "desc": "POWER BANK ULTRASLIM MAGNÉTICO - GEONAV", "prat": 4, "sistema": 24, "dif": 0, "status": "OK", "multi": false, "refTotal": 24}]}, {"n": 7, "itens": []}, {"n": 8, "itens": []}, {"n": 9, "itens": [{"ref": "7898739501492", "qtd": 306, "desc": "CABO USB-C PARA USB-C 2.0 EM SILICONE, 1,5M BRANCO- GEONAV", "prat": 1, "sistema": 306, "dif": 0, "status": "OK", "multi": false, "refTotal": 306}]}], "resumo": {"refs": 36, "fisico": 1824, "sistema": 1845, "dif": -21}};
+
+var app = document.getElementById('app');
+
+function esc(s) {
+  return String(s).replace(/[&<>"]/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+  });
+}
+function nf(n) { return Number(n).toLocaleString('pt-BR'); }
+function plural(n, um, muitos) { return n === 1 ? um : muitos; }
+
+var STATUS = {
+  'OK':            { cls: 'ok',     txt: 'Confere' },
+  'FALTA FÍSICA':  { cls: 'falta',  txt: 'Falta física' },
+  'SOBRA FÍSICA':  { cls: 'sobra',  txt: 'Sobra física' },
+  'SEM CADASTRO':  { cls: 'semcad', txt: 'Sem cadastro' }
+};
+
+function pill(status) {
+  var s = STATUS[status];
+  if (!s || s.cls === 'ok') return '';
+  return '<span class="pill pill-' + s.cls + '">' + s.txt + '</span>';
+}
+
+function armario(n) {
+  for (var i = 0; i < DADOS.armarios.length; i++) {
+    if (DADOS.armarios[i].n === n) return DADOS.armarios[i];
+  }
+  return null;
+}
+function totalPecas(a) {
+  return a.itens.reduce(function (s, it) { return s + it.qtd; }, 0);
+}
+
+/* ---------------- busca global ---------------- */
+function todosItens() {
+  var out = [];
+  DADOS.armarios.forEach(function (a) {
+    a.itens.forEach(function (it) {
+      out.push({ arm: a.n, it: it });
+    });
+  });
+  return out;
+}
+
+var RE_ACENTOS = new RegExp('[\\u0300-\\u036f]', 'g');
+function normaliza(s) {
+  return String(s).toLowerCase().normalize('NFD').replace(RE_ACENTOS, '');
+}
+
+function filtra(lista, termo) {
+  var t = normaliza(termo).split(/\s+/).filter(Boolean);
+  if (!t.length) return lista;
+  return lista.filter(function (row) {
+    var it = row.it || row;
+    var alvo = normaliza(it.desc + ' ' + it.ref);
+    return t.every(function (p) { return alvo.indexOf(p) !== -1; });
+  });
+}
+
+/* ---------------- telas ---------------- */
+function viewHome(termo) {
+  var totalRefs = DADOS.resumo.refs;
+  var h = '';
+
+  h += '<div class="search no-print">' +
+    '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>' +
+    '<input id="q" type="search" placeholder="Buscar acessório ou código" value="' + esc(termo || '') + '" autocomplete="off">' +
+    (termo ? '<button class="search-clear" id="qclear" aria-label="Limpar busca">&times;</button>' : '') +
+    '</div>';
+
+  if (termo) {
+    var achados = filtra(todosItens(), termo);
+    h += '<div class="section-label"><span>Resultados</span><span class="count">' + achados.length + '</span></div>';
+    if (!achados.length) {
+      h += '<div class="empty">Nenhum acessório encontrado para <b>' + esc(termo) + '</b>.</div>';
+    } else {
+      h += '<div class="items">';
+      achados.forEach(function (row) {
+        var it = row.it;
+        h += '<div class="item">' +
+          '<div class="item-qtd">' + nf(it.qtd) + '<small>un</small></div>' +
+          '<div>' +
+            '<div class="item-desc">' + esc(it.desc) + '</div>' +
+            '<div class="item-meta">' +
+              '<span class="where">Armário <b>' + row.arm + '</b> · Prateleira <b>' + it.prat + '</b></span>' +
+              '<span class="ref">' + esc(it.ref) + '</span>' +
+              pill(it.status) +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      });
+      h += '</div>';
+    }
+    return h;
+  }
+
+  h += '<div class="section-label"><span>Armários</span><span class="count">' +
+       nf(DADOS.resumo.fisico) + ' peças</span></div>';
+  h += '<div class="cab-grid">';
+  DADOS.armarios.forEach(function (a) {
+    var pecas = totalPecas(a);
+    var vazio = a.itens.length === 0;
+    h += '<a class="cab' + (vazio ? ' vazio' : '') + '" href="#/arm/' + a.n + '">' +
+      '<div class="cab-n"><span>Armário</span><b>' + a.n + '</b></div>' +
+      '<div class="cab-qtd">' + (vazio ? '—' : nf(pecas)) + '</div>' +
+      '<div class="cab-sub">' + (vazio ? 'sem itens' : nf(pecas) + ' ' + plural(pecas, 'peça', 'peças') + ' · ' + a.itens.length + ' ' + plural(a.itens.length, 'ref', 'refs')) + '</div>' +
+      '</a>';
+  });
+  h += '</div>';
+
+  h += '<div class="section-label"><span>Conferência geral</span></div>';
+  h += '<dl class="stats">' +
+    '<div class="stat"><dt>Referências</dt><dd>' + nf(totalRefs) + '</dd></div>' +
+    '<div class="stat"><dt>Físico</dt><dd>' + nf(DADOS.resumo.fisico) + '</dd></div>' +
+    '<div class="stat"><dt>Sistema</dt><dd>' + nf(DADOS.resumo.sistema) + '</dd></div>' +
+    '<div class="stat"><dt>Diferença</dt><dd class="' + (DADOS.resumo.dif < 0 ? 'neg' : '') + '">' +
+      (DADOS.resumo.dif > 0 ? '+' : '') + nf(DADOS.resumo.dif) + '</dd></div>' +
+    '</dl>';
+  h += '<div class="legend">' +
+    '<span><i class="dot" style="background:var(--ok)"></i>Confere</span>' +
+    '<span><i class="dot" style="background:var(--falta)"></i>Falta física</span>' +
+    '<span><i class="dot" style="background:var(--sobra)"></i>Sobra física</span>' +
+    '<span><i class="dot" style="background:var(--semcad)"></i>Sem cadastro</span>' +
+    '</div>';
+
+  h += '<div class="section-label no-print"><span>Etiquetas</span></div>';
+  h += '<a class="btn btn-accent no-print" href="#/qr">Gerar QR Codes dos armários</a>';
+
+  return h;
+}
+
+function viewArmario(n, termo) {
+  var a = armario(n);
+  if (!a) return '<div class="empty">Armário ' + esc(n) + ' não existe.</div>';
+
+  var pecas = totalPecas(a);
+  var h = '';
+
+  h += '<a class="btn btn-ghost no-print" href="#/">&larr; Todos os armários</a>';
+
+  h += '<div class="cab-head">' +
+    '<div class="cab-badge">' + a.n + '</div>' +
+    '<div class="cab-head-txt">' +
+      '<h2>Armário</h2>' +
+      '<p>' + nf(pecas) + ' ' + plural(pecas, 'peça', 'peças') + ' · ' + a.itens.length + ' ' + plural(a.itens.length, 'ref', 'refs') + '</p>' +
+    '</div>' +
+  '</div>';
+
+  if (!a.itens.length) {
+    h += '<div class="section-label"><span>Conteúdo</span></div>';
+    h += '<div class="empty">Este armário está vazio no inventário de ' + esc(DADOS.gerado) + '.</div>';
+    return h;
+  }
+
+  h += '<div class="conf-bar no-print">' +
+    '<div class="search conf-search">' +
+      '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>' +
+      '<input id="q" type="search" placeholder="Filtrar neste armário" value="' + esc(termo || '') + '" autocomplete="off">' +
+      (termo ? '<button class="search-clear" id="qclear" aria-label="Limpar busca">&times;</button>' : '') +
+    '</div>' +
+    '<label class="switch"><input type="checkbox" id="confToggle"><span class="track"></span>Conferência</label>' +
+  '</div>';
+
+  var itens = filtra(a.itens.slice(), termo || '');
+  if (!itens.length) {
+    h += '<div class="empty" style="margin-top:18px">Nenhum item encontrado para <b>' + esc(termo) + '</b> neste armário.</div>';
+    return h;
+  }
+
+  // agrupa por prateleira
+  var prats = [];
+  itens.forEach(function (it) { if (prats.indexOf(it.prat) === -1) prats.push(it.prat); });
+  prats.sort(function (x, y) { return x - y; });
+
+  prats.forEach(function (p) {
+    var doShelf = itens.filter(function (it) { return it.prat === p; });
+    var soma = doShelf.reduce(function (s, it) { return s + it.qtd; }, 0);
+    h += '<section class="shelf">' +
+      '<div class="shelf-head">' +
+        '<span class="shelf-tag">Prateleira ' + p + '</span>' +
+        '<span class="shelf-rule"></span>' +
+        '<span class="shelf-count">' + nf(soma) + ' un</span>' +
+      '</div>' +
+      '<div class="items">';
+    doShelf.forEach(function (it) {
+      h += '<div class="item">' +
+        '<div class="item-qtd">' + nf(it.qtd) + '<small>un</small></div>' +
+        '<div>' +
+          '<div class="item-desc">' + esc(it.desc) + '</div>' +
+          '<div class="item-meta"><span class="ref">' + esc(it.ref) + '</span>' + pill(it.status) + '</div>' +
+          '<div class="conf">' +
+            '<span><i>sistema</i> ' + (it.sistema === null ? '—' : nf(it.sistema)) + '</span>' +
+            '<span><i>diferença</i> ' + (it.dif === null ? '—' : (it.dif > 0 ? '+' : '') + nf(it.dif)) + '</span>' +
+            (it.multi ? '<span><i>total da ref no armário</i> ' + nf(it.refTotal) + '</span>' : '') +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    });
+    h += '</div></section>';
+  });
+
+  return h;
+}
+
+/* localStorage pode ser bloqueado dentro de iframes com origem opaca */
+function guarda(chave, valor) {
+  try {
+    if (valor === undefined) return localStorage.getItem(chave);
+    localStorage.setItem(chave, valor);
+  } catch (e) {}
+  return null;
+}
+
+function baseUrl() {
+  var salvo = guarda('disp_base');
+  if (salvo) return salvo;
+  return location.origin + location.pathname;
+}
+
+/* O endereço só serve para o QR se um celular conseguir abri-lo. */
+function enderecoServe() {
+  if (location.protocol !== 'http:' && location.protocol !== 'https:') return false;
+  var h = location.hostname;
+  if (!h || h === 'localhost' || h === '127.0.0.1' || h === '0.0.0.0') return false;
+  if (location.origin === 'null') return false;
+  return true;
+}
+
+function viewQR() {
+  var base = baseUrl();
+  var h = '';
+
+  h += '<a class="btn btn-ghost no-print" href="#/">&larr; Todos os armários</a>';
+  h += '<div class="section-label"><span>QR Codes dos armários</span></div>';
+
+  h += '<div class="note no-print">' +
+    (enderecoServe()
+      ? '<b>Confira o endereço antes de imprimir.</b> É exatamente ele que vai dentro do QR Code. ' +
+        'Precisa ser o endereço público da página — aquele que abre no celular, fora da sua conta.'
+      : '<b>Este endereço não abre no celular.</b> A página está sendo vista de um arquivo local ' +
+        'ou de um endereço interno. Cole abaixo o endereço público da página antes de imprimir as etiquetas.') +
+    '</div>';
+
+  h += '<div class="url-field no-print">' +
+    '<label for="baseurl">Endereço da página</label>' +
+    '<input id="baseurl" type="url" value="' + esc(base) + '" spellcheck="false" ' +
+      'placeholder="https://…">' +
+    '</div>';
+
+  h += '<div class="conf-bar no-print" style="margin-bottom:16px">' +
+    '<button class="btn btn-accent" id="printBtn">Imprimir etiquetas</button>' +
+    '</div>';
+
+  h += '<div class="qr-grid" id="qrgrid"></div>';
+  return h;
+}
+
+function desenhaQR() {
+  var grid = document.getElementById('qrgrid');
+  if (!grid) return;
+  var base = document.getElementById('baseurl').value.trim();
+  var html = '';
+  DADOS.armarios.forEach(function (a) {
+    var url = base + '#/arm/' + a.n;
+    var svg;
+    try {
+      svg = QR.toSvg(url);
+    } catch (e) {
+      svg = '<p class="qr-note">Endereço longo demais para gerar o QR.</p>';
+    }
+    var pecas = totalPecas(a);
+    html += '<div class="qr-card">' +
+      '<div class="qr-title">ARMÁRIO ' + a.n + '</div>' +
+      svg +
+      '<div class="qr-sub">Aponte a câmera</div>' +
+      '<div class="qr-note">' + (pecas ? nf(pecas) + ' ' + plural(pecas, 'peça', 'peças') : 'vazio') +
+        ' · ' + esc(DADOS.gerado) + '</div>' +
+      '</div>';
+  });
+  grid.innerHTML = html;
+}
+
+/* ---------------- roteamento ---------------- */
+function render() {
+  var hash = location.hash.replace(/^#/, '') || '/';
+  var partes = hash.split('?');
+  var rota = partes[0];
+  var termo = '';
+  if (partes[1]) {
+    var m = /(?:^|&)q=([^&]*)/.exec(partes[1]);
+    if (m) termo = decodeURIComponent(m[1].replace(/\+/g, ' '));
+  }
+
+  var mArm = /^\/arm\/(\d+)$/.exec(rota);
+  if (rota === '/qr') {
+    app.innerHTML = viewQR();
+    document.getElementById('printBtn').addEventListener('click', function () { window.print(); });
+    var inp = document.getElementById('baseurl');
+    var td;
+    function atualiza() {
+      guarda('disp_base', inp.value.trim());
+      desenhaQR();
+    }
+    inp.addEventListener('input', function () {
+      clearTimeout(td);
+      td = setTimeout(atualiza, 250);
+    });
+    inp.addEventListener('change', atualiza);
+    desenhaQR();
+  } else if (mArm) {
+    app.innerHTML = viewArmario(parseInt(mArm[1], 10), termo);
+    ligaBusca(rota);
+    ligaConferencia();
+  } else {
+    app.innerHTML = viewHome(termo);
+    ligaBusca('/');
+  }
+  window.scrollTo(0, 0);
+}
+
+function ligaConferencia() {
+  var tg = document.getElementById('confToggle');
+  if (!tg) return;
+  tg.checked = guarda('disp_conf') === '1';
+  document.body.classList.toggle('show-conf', tg.checked);
+  tg.addEventListener('change', function () {
+    document.body.classList.toggle('show-conf', tg.checked);
+    guarda('disp_conf', tg.checked ? '1' : '0');
+  });
+}
+
+function ligaBusca(rota) {
+  var q = document.getElementById('q');
+  if (!q) return;
+  var t;
+  q.addEventListener('input', function () {
+    clearTimeout(t);
+    t = setTimeout(function () {
+      var v = q.value.trim();
+      var novo = '#' + rota + (v ? '?q=' + encodeURIComponent(v) : '');
+      history.replaceState(null, '', novo);
+      var pos = q.selectionStart;
+      renderMantendoFoco(rota, v, pos);
+    }, 160);
+  });
+  var c = document.getElementById('qclear');
+  if (c) c.addEventListener('click', function () { location.hash = '#' + rota; });
+}
+
+function renderMantendoFoco(rota, termo, pos) {
+  var mArm = /^\/arm\/(\d+)$/.exec(rota);
+  app.innerHTML = mArm ? viewArmario(parseInt(mArm[1], 10), termo) : viewHome(termo);
+  ligaBusca(rota);
+  ligaConferencia();
+  var q = document.getElementById('q');
+  if (q) { q.focus(); try { q.setSelectionRange(pos, pos); } catch (e) {} }
+}
+
+window.addEventListener('hashchange', render);
+render();
+</script>
