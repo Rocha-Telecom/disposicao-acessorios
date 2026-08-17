@@ -7,7 +7,8 @@ Uso:
     python gerar_pagina.py
 
 Saida:
-    disposicao.html  (arquivo unico, sem dependencias externas)
+    index.html     (arquivo unico, sem dependencias externas)
+    artifact.html  (mesmo conteudo, sem <head>, para publicar como artifact)
 
 A planilha e apenas LIDA - nunca gravada.
 """
@@ -29,6 +30,22 @@ QRJS = os.path.join(AQUI, "qr.js")
 SAIDA = os.path.join(AQUI, "index.html")
 SAIDA_ARTIFACT = os.path.join(AQUI, "artifact.html")
 
+# Icone da aba: um armario com prateleiras, desenhado em SVG e embutido como
+# data URI - nada de arquivo .ico separado, para a pagina continuar sendo um
+# arquivo unico que funciona offline. Cores iguais as do tema escuro.
+ICONE = (
+    u"data:image/svg+xml,"
+    u"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'>"
+    u"<rect width='32' height='32' rx='7' fill='%230D1216'/>"
+    u"<rect x='5.5' y='3.5' width='21' height='22' rx='3' fill='%23FFC22E'/>"
+    u"<rect x='8.2' y='6.2' width='15.6' height='17' rx='1.2' fill='%230D1216'/>"
+    u"<rect x='8.2' y='10.4' width='15.6' height='2.2' fill='%23FFC22E'/>"
+    u"<rect x='8.2' y='16.8' width='15.6' height='2.2' fill='%23FFC22E'/>"
+    u"<rect x='9' y='25.5' width='3' height='2.8' rx='1' fill='%23FFC22E'/>"
+    u"<rect x='20' y='25.5' width='3' height='2.8' rx='1' fill='%23FFC22E'/>"
+    u"</svg>"
+)
+
 # Envolve o conteudo num documento completo (necessario para abrir como
 # arquivo local ou hospedar em qualquer servidor). A versao 'artifact.html'
 # vai sem isso porque a plataforma injeta o proprio cabecalho.
@@ -38,9 +55,12 @@ MOLDURA = u"""<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0D1216">
+<link rel="icon" href="%(icone)s">
+<link rel="apple-touch-icon" href="%(icone)s">
 </head>
 <body>
-%s
+%(corpo)s
 </body>
 </html>
 """
@@ -163,7 +183,7 @@ def main():
     html = html.replace("/*{{GERADO}}*/", gerado)
 
     with io.open(SAIDA, "w", encoding="utf-8") as f:
-        f.write(MOLDURA % html)
+        f.write(MOLDURA % {"corpo": html, "icone": ICONE})
     with io.open(SAIDA_ARTIFACT, "w", encoding="utf-8") as f:
         f.write(html)
 
