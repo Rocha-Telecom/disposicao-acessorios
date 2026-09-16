@@ -1,5 +1,7 @@
 # Disposição de Acessórios
 
+Criado por **Giovanni Brochini**.
+
 Página de consulta que mostra o que tem dentro de cada armário do estoque de
 acessórios. Cada armário tem um QR Code para colar na porta: quem aponta a
 câmera cai direto na lista daquele armário.
