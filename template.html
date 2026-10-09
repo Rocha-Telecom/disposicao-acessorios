@@ -115,6 +115,16 @@
     margin: 0;
   }
   .brand a { text-decoration: none; }
+  .voltar-inicio {
+    display: inline-block;
+    color: var(--slate-ink-2);
+    text-decoration: none;
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    margin-bottom: 8px;
+  }
+  .voltar-inicio:hover { color: var(--slate-ink); }
   .stamp {
     font-family: var(--font-mono);
     font-size: .6875rem;
@@ -620,6 +630,7 @@
 
 <header class="topbar no-print">
   <div class="wrap">
+    <a class="voltar-inicio" href="../">&larr; Início</a>
     <div class="topbar-row">
       <p class="brand"><a href="#/">Disposição de Acessórios</a></p>
       <p class="stamp">INVENTÁRIO /*{{GERADO}}*/</p>
